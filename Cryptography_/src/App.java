@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
@@ -62,9 +63,25 @@ public class App extends JFrame {
         JPanel buttonPanel = new JPanel();
         JButton executeButton = new JButton("Execute");
         buttonPanel.add(executeButton);
+        buttonPanel.setBackground(Color.decode("#009CDE"));
+
+        ////Set all label in white color
+        plaintextLabel.setForeground(Color.white);
+        selectAlgoLabel.setForeground(Color.white);
+        keyLabel.setForeground(Color.white);
+        cipherLabel.setForeground(Color.white);
+
+        ///set all label size bigger
+        // Set custom font
+        Font labelFont = new Font("Arial", Font.PLAIN, 14); // Bold, 14px
+        Font inputFont = new Font("Arial", Font.PLAIN, 14); // Normal, 14px
+
+        plaintextLabel.setFont(labelFont);
+        selectAlgoLabel.setFont(labelFont);
+        keyLabel.setFont(labelFont);
+        cipherLabel.setFont(labelFont);
 
         ///Center the main grid using wrapper panel
-
         mainPanel.add(gridJPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
         ///Add frame into the panel
