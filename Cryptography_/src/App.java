@@ -25,14 +25,14 @@ public class App extends JFrame {
         ////Customize buy myself
         // frame.getContentPane().setBackground(Color.); ///color set "#009CDE"
         frame.getContentPane().setBackground(Color.decode("#009CDE")); ///color set "#009CDE"
-
         ///Create a main panel for centering the grid
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add margin
+        mainPanel.setBackground(Color.decode("#009CDE"));
 
         ///Create Panel with gridLayout
         JPanel gridJPanel = new JPanel(new GridLayout(0, 2, 10, 10));
-
+        gridJPanel.setBackground(Color.decode("#009CDE"));
         ///Create label and text field
         JLabel plaintextLabel = new JLabel("Entyer your plain text");
         JTextField plainTextField = new JTextField(15);
