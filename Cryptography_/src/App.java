@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +18,7 @@ public class App extends JFrame {
 
         JFrame frame = new JFrame("Cryptography Application");
         // Create a JFrame (window)
-        frame.setSize(1080, 720);
+        frame.setSize(800, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null); // Center window
 
@@ -27,23 +28,16 @@ public class App extends JFrame {
 
         ///Create a main panel for centering the grid
         JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add margin
 
-        mainPanel.setBackground(Color.decode("#009CDE"));
         ///Create Panel with gridLayout
-        JPanel gridJPanel = new JPanel(new GridLayout(0, 2, 0, 10));
-
-        ///make custom height for text field and selection field
-        Dimension inputFieldSize = new Dimension(120, 2);
+        JPanel gridJPanel = new JPanel(new GridLayout(0, 2, 10, 10));
 
         ///Create label and text field
         JLabel plaintextLabel = new JLabel("Entyer your plain text");
-        JTextField plainTextField = new JTextField(10);
-
+        JTextField plainTextField = new JTextField(15);
         gridJPanel.add(plaintextLabel);
         gridJPanel.add(plainTextField);
-        plainTextField.setPreferredSize(inputFieldSize);
-        ///reduced internal padding of text field
-        plainTextField.setMargin(new Insets(2, 5, 2, 5));
 
         ///Create label and selection input field
         JLabel selectAlgoLabel = new JLabel("Select your algorithm");
@@ -53,20 +47,26 @@ public class App extends JFrame {
         gridJPanel.add(selectComboBox);
 
         ///Create label and key input value
-        gridJPanel.add(new JLabel("Enter the key"));
-        gridJPanel.add(new JTextField(10));
+        JLabel keyLabel = new JLabel("Enter the key");
+        JTextField KeyTextField = new JTextField(15);
+        gridJPanel.add(keyLabel);
+        gridJPanel.add(KeyTextField);
 
         ///Create label and output field
-        gridJPanel.add(new JLabel("Cipher text"));
-        gridJPanel.add(new JTextField(10));
+        JLabel cipherLabel = new JLabel("Cipher text");
+        JTextField chiperTextField = new JTextField(15);
+        gridJPanel.add(cipherLabel);
+        gridJPanel.add(chiperTextField);
 
-        // Wrap the grid in an empty border to create margin
-        gridJPanel.setBorder(BorderFactory.createEmptyBorder(40, 40, 40, 40));
+        // Create Execute Button in Separate Panel
+        JPanel buttonPanel = new JPanel();
+        JButton executeButton = new JButton("Execute");
+        buttonPanel.add(executeButton);
 
         ///Center the main grid using wrapper panel
 
         mainPanel.add(gridJPanel, BorderLayout.CENTER);
-
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
         ///Add frame into the panel
         frame.add(mainPanel);
 
