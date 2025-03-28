@@ -1,9 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class App extends JFrame {
+
+    static int key;
 
     public static void main(String[] args) throws Exception {
 
@@ -64,6 +66,8 @@ public class App extends JFrame {
         JButton executeButton = new JButton("Execute");
         buttonPanel.add(executeButton);
         buttonPanel.setBackground(Color.decode("#009CDE"));
+        executeButton.setForeground(Color.decode("#009CDE"));
+        executeButton.setBackground(Color.white);
 
         ////Set all label in white color
         plaintextLabel.setForeground(Color.white);
@@ -84,6 +88,18 @@ public class App extends JFrame {
         ///Center the main grid using wrapper panel
         mainPanel.add(gridJPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        ///Event handler by button
+        executeButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String plainText = plainTextField.getText();
+                chiperTextField.setText(plainText);
+            }
+
+        });
+
         ///Add frame into the panel
         frame.add(mainPanel);
 
