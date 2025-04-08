@@ -13,55 +13,63 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class App extends JFrame {
+public class App {
 
     static int key;
+    static JComboBox selectComboBox;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
         JFrame frame = new JFrame("Cryptography Application");
-        // Create a JFrame (window)
+
+        // setup a JFrame (window)
         frame.setSize(800, 300);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null); // Center window
 
-        ////Customize buy myself
+        ////Customize by myself
         // frame.getContentPane().setBackground(Color.); ///color set "#009CDE"
         frame.getContentPane().setBackground(Color.decode("#009CDE")); ///color set "#009CDE"
-        ///Create a main panel for centering the grid
+
+        ///setup a main panel for centering the grid
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add margin
         mainPanel.setBackground(Color.decode("#009CDE"));
 
-        ///Create Panel with gridLayout
+        ///setup Panel with gridLayout
         JPanel gridJPanel = new JPanel(new GridLayout(0, 2, 10, 10));
         gridJPanel.setBackground(Color.decode("#009CDE"));
-        ///Create label and text field
-        JLabel plaintextLabel = new JLabel("Entyer your plain text");
+        ///setup label and text field
+        JLabel plaintextLabel = new JLabel("Enter your plain text");
         JTextField plainTextField = new JTextField(15);
         gridJPanel.add(plaintextLabel);
         gridJPanel.add(plainTextField);
 
-        ///Create label and selection input field
+        ///setup label and selection input field
         JLabel selectAlgoLabel = new JLabel("Select your algorithm");
-        String[] algoString = new String[] { "AES", "DES", "RSA" };
-        JComboBox selectComboBox = new JComboBox<>(algoString);
+
+        String[] algoString = new String[] { "Reverse cipher", "Rail Fence cipher", "Geometric Figure",
+                "Columnar transposition cipher", "Double columnar transposition", "Row Transposition ciphers",
+                "Nihilist Transposition ciphers" };
+
+        selectComboBox = new JComboBox<>(algoString);
+
         gridJPanel.add(selectAlgoLabel);
         gridJPanel.add(selectComboBox);
 
-        ///Create label and key input value
+        ///setup label and key input value
         JLabel keyLabel = new JLabel("Enter the key");
         JTextField KeyTextField = new JTextField(15);
         gridJPanel.add(keyLabel);
         gridJPanel.add(KeyTextField);
 
-        ///Create label and output field
+        ///setup label and output field
         JLabel cipherLabel = new JLabel("Cipher text");
         JTextField chiperTextField = new JTextField(15);
         gridJPanel.add(cipherLabel);
         gridJPanel.add(chiperTextField);
 
-        // Create Execute Button in Separate Panel
+        // setup Execute Button in Separate Panel
         JPanel buttonPanel = new JPanel();
         JButton executeButton = new JButton("Execute");
         buttonPanel.add(executeButton);
@@ -78,14 +86,13 @@ public class App extends JFrame {
         ///set all label size bigger
         // Set custom font
         Font labelFont = new Font("Arial", Font.PLAIN, 14); // Bold, 14px
-        Font inputFont = new Font("Arial", Font.PLAIN, 14); // Normal, 14px
 
         plaintextLabel.setFont(labelFont);
         selectAlgoLabel.setFont(labelFont);
         keyLabel.setFont(labelFont);
         cipherLabel.setFont(labelFont);
 
-        ///Center the main grid using wrapper panel
+        ///Center the main grid using gridPanel panel
         mainPanel.add(gridJPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
 
@@ -95,7 +102,9 @@ public class App extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String plainText = plainTextField.getText();
-                chiperTextField.setText(plainText);
+                chooseEncryptAlgoString();
+                chiperTextField.setText(plainText + " " + selectComboBox.getSelectedItem());
+
             }
 
         });
@@ -105,5 +114,81 @@ public class App extends JFrame {
 
         // Make window visible
         frame.setVisible(true);
+    }
+
+    public static void chooseEncryptAlgoString() {
+
+        ///Coonvert comboBox value into string;
+        String valueString = selectComboBox.getSelectedItem().toString();
+
+        switch (valueString) {
+            case "Reverse cipher":
+                System.out.println(valueString);
+                reverseCipher();
+                break;
+            case "Rail Fence cipher":
+                System.out.println(valueString);
+                railFenceCipher();
+                break;
+            case "Geometric Figure":
+                System.out.println(valueString);
+                geometricFigure();
+                break;
+            case "Columnar transposition cipher":
+                System.out.println(valueString);
+                columnarTranspositionCipher();
+                break;
+            case "Double columnar transposition":
+                System.out.println(valueString);
+                doubleColumnarTransposition();
+                break;
+            case "Row Transposition ciphers":
+                System.out.println(valueString);
+                rowTranspositionCiphers();
+                break;
+            case "Nihilist Transposition ciphers":
+                System.out.println(valueString);
+                nihilistTranspositionCiphers();
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    public static String reverseCipher() {
+
+        return "ddd";
+    }
+
+    public static String railFenceCipher() {
+
+        return "ddd";
+    }
+
+    public static String geometricFigure() {
+
+        return "ddd";
+    }
+
+    public static String columnarTranspositionCipher() {
+
+        return "ddd";
+    }
+
+    public static String doubleColumnarTransposition() {
+
+        return "ddd";
+    }
+
+    public static String rowTranspositionCiphers() {
+
+        return "ddd";
+    }
+
+    public static String nihilistTranspositionCiphers() {
+
+        return "ddd";
     }
 }
