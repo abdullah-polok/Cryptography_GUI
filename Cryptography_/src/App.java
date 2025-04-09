@@ -17,6 +17,8 @@ public class App {
 
     static int key;
     static JComboBox selectComboBox;
+    static JTextField plainTextField;
+    static JTextField ciperTextField;
 
     public static void main(String[] args) {
 
@@ -41,7 +43,7 @@ public class App {
         gridJPanel.setBackground(Color.decode("#009CDE"));
         ///setup label and text field
         JLabel plaintextLabel = new JLabel("Enter your plain text");
-        JTextField plainTextField = new JTextField(15);
+        plainTextField = new JTextField(15);
         gridJPanel.add(plaintextLabel);
         gridJPanel.add(plainTextField);
 
@@ -65,9 +67,9 @@ public class App {
 
         ///setup label and output field
         JLabel cipherLabel = new JLabel("Cipher text");
-        JTextField chiperTextField = new JTextField(15);
+        ciperTextField = new JTextField(15);
         gridJPanel.add(cipherLabel);
-        gridJPanel.add(chiperTextField);
+        gridJPanel.add(ciperTextField);
 
         // setup Execute Button in Separate Panel
         JPanel buttonPanel = new JPanel();
@@ -101,9 +103,7 @@ public class App {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                String plainText = plainTextField.getText();
                 chooseEncryptAlgoString();
-                chiperTextField.setText(plainText + " " + selectComboBox.getSelectedItem());
 
             }
 
@@ -124,11 +124,14 @@ public class App {
         switch (valueString) {
             case "Reverse cipher":
                 System.out.println(valueString);
-                reverseCipher();
+                String getReverseCipherText = reverseCipher();
+                ciperTextField.setText(getReverseCipherText);
                 break;
             case "Rail Fence cipher":
                 System.out.println(valueString);
                 railFenceCipher();
+                String getRailCipherText = railFenceCipher();
+                ciperTextField.setText(getRailCipherText);
                 break;
             case "Geometric Figure":
                 System.out.println(valueString);
@@ -159,12 +162,27 @@ public class App {
 
     public static String reverseCipher() {
 
-        return "ddd";
+        String plainText = plainTextField.getText();
+        String reversed = "";
+        for (int i = plainText.length() - 1; i >= 0; i--) {
+            reversed += plainText.charAt(i);
+        }
+        return reversed;
+
     }
 
     public static String railFenceCipher() {
 
-        return "ddd";
+        String rail1 = "", rail2 = "";
+
+        for (int i = 0; i < plainTextField.getText().length(); i++) {
+            if (i % 2 == 0)
+                rail1 += plainTextField.getText().charAt(i); // Even index
+            else
+                rail2 += plainTextField.getText().charAt(i); // Odd index
+        }
+
+        return rail1 + rail2;
     }
 
     public static String geometricFigure() {
