@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -15,7 +16,7 @@ import javax.swing.JTextField;
 
 public class App {
 
-    static int key;
+    static JTextField KeyTextField;
     static JComboBox selectComboBox;
     static JTextField plainTextField;
     static JTextField ciperTextField;
@@ -61,7 +62,7 @@ public class App {
 
         ///setup label and key input value
         JLabel keyLabel = new JLabel("Enter the key");
-        JTextField KeyTextField = new JTextField(15);
+        KeyTextField = new JTextField(15);
         gridJPanel.add(keyLabel);
         gridJPanel.add(KeyTextField);
 
@@ -140,7 +141,8 @@ public class App {
                 break;
             case "Columnar transposition cipher":
                 System.out.println(valueString);
-                columnarTranspositionCipher();
+                String columnerString = columnarTranspositionCipher();
+                ciperTextField.setText(columnerString);
                 break;
             case "Double columnar transposition":
                 System.out.println(valueString);
@@ -208,6 +210,7 @@ public class App {
                     geoArray[i][j] = 'x';
             }
         }
+
         for (int i = 0; i < col; i++) {
             for (int j = 0; j < row; j++) {
                 geoString += geoArray[j][i];
@@ -218,8 +221,64 @@ public class App {
     }
 
     public static String columnarTranspositionCipher() {
+        // extra verification for key
+        String keyText = KeyTextField.getText();
+        int col;
+        char[] colChar;
 
-        return "ddd";
+        if (keyText.length() == 1 && Character.isDigit(keyText.charAt(0))) {
+            col = Integer.parseInt(keyText);
+
+            // fill colChar with default 'A', 'B', ... just for internal usage
+            colChar = new char[col];
+            for (int i = 0; i < col; i++) {
+                colChar[i] = (char) ('A' + i);
+            }
+        } else {
+            col = keyText.length();
+            colChar = keyText.toCharArray();
+        }
+
+        // make a copy and sort it using built-in sort
+        char[] sortedKey = Arrays.copyOf(colChar, col);
+        Arrays.sort(sortedKey);
+
+        // calculate rows
+        String plainText = plainTextField.getText();
+        int row = (int) Math.ceil((double) plainText.length() / col);
+        String columnerString = "";
+
+        // fill with characters and pad with 'x'
+        char[][] ColumnarArray = new char[row][col];
+        int index = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (index < plainText.length()) {
+                    ColumnarArray[i][j] = plainText.charAt(index++);
+                } else {
+                    ColumnarArray[i][j] = 'x';
+                }
+            }
+        }
+
+        // track used columns
+        boolean[] used = new boolean[col];
+
+        // read in column order based on sorted key
+        for (int k = 0; k < col; k++) {
+            char currentChar = sortedKey[k];
+            for (int i = 0; i < col; i++) {
+                if (colChar[i] == currentChar && !used[i]) {
+                    for (int j = 0; j < row; j++) {
+                        columnerString += ColumnarArray[j][i];
+                    }
+                    used[i] = true;
+                    break;
+                }
+            }
+        }
+
+        return columnerString;
     }
 
     public static String doubleColumnarTransposition() {
