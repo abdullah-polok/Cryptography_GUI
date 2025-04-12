@@ -135,7 +135,8 @@ public class App {
                 break;
             case "Geometric Figure":
                 System.out.println(valueString);
-                geometricFigure();
+                String geoString = geometricFigure();
+                ciperTextField.setText(geoString);
                 break;
             case "Columnar transposition cipher":
                 System.out.println(valueString);
@@ -187,7 +188,33 @@ public class App {
 
     public static String geometricFigure() {
 
-        return "ddd";
+        ///fix column like 5
+        ///find row value
+        int col = 5;
+        int row = (int) Math.ceil((double) plainTextField.getText().length() / col);
+        String geoString = "";
+
+        ///for extra charecter fill up with X
+        int index = 0;
+
+        char[][] geoArray = new char[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (index < plainTextField.getText().length()) {
+                    geoArray[i][j] = plainTextField.getText().charAt(index);
+                    index++;
+                } else
+                    geoArray[i][j] = 'x';
+            }
+        }
+        for (int i = 0; i < col; i++) {
+            for (int j = 0; j < row; j++) {
+                geoString += geoArray[j][i];
+            }
+        }
+
+        return geoString;
     }
 
     public static String columnarTranspositionCipher() {
