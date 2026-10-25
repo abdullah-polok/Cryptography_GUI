@@ -14,5 +14,7 @@ jobs:
         run: ls -la
       - name: Show current directory
         run: pwd
+      - name: Good bye
+        run: echo "good bye from github actions"
       - name: check index.html contain h1
         run: grep "<h1>" index.html
