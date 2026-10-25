@@ -14,3 +14,5 @@ jobs:
            run: ls -la
          - name: Show current directory
            run: pwd
+         - name: check index.html contain h1
+           run: grep "<h1>" index.html
